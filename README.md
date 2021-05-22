@@ -25,7 +25,8 @@ Sample configuration file.
   "retries" : 5,
   "userIdField" : "userId", // unused
   "valueField" : "", // unused
-  "eventTypePrefix" : "mo" // unused
+  "eventTypePrefix" : "mo", // unused
+  "debugDirectory" : "/tmp/split"
 }
 ```
 Configuration Fields:
@@ -37,3 +38,4 @@ Configuration Fields:
 * "siteId" - what is your Matomo site id? Find in Matomo console.
 * "batchSize" - how many Split events to send across in a single API request
 * "retries" - how many attempts should be made to resend data before a fail?
+* "debugDirectory" - events that could not be written to split are deposited here for debugging

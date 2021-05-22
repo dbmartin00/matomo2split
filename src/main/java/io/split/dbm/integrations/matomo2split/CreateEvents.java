@@ -1,5 +1,7 @@
 package io.split.dbm.integrations.matomo2split;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -61,18 +63,15 @@ public class CreateEvents {
 			} while(retries++ < config.retries && response != null && response.statusCode() >= 400);
 
 			if(statusCode >= 400 && response != null && response.body() != null) {
-//				String debugFilePath = config.debugDirectory + System.getProperty("file.separator") + "mixpanel2split-debug-" + System.currentTimeMillis() + ".json";
-				System.out.println("ERROR - " +  "failed to send events to split... " + response.body());
-//				File debugFile = new File(debugFilePath);
-//				debugFile.createNewFile();
-//				PrintWriter out = new PrintWriter(debugFilePath);
-//				out.println(batch.toString(2));
-//				out.close();
+				String debugFilePath = config.debugDirectory + System.getProperty("file.separator") + "matomo-debug-" + System.currentTimeMillis() + ".json";
+				System.out.println("ERROR - " +  "failed to send events to split... " + response.body() + ". Writing payload to " + debugFilePath);
+				File debugFile = new File(debugFilePath);
+				debugFile.createNewFile();
+				PrintWriter out = new PrintWriter(debugFilePath);
+				out.println(batch.toString(2));
+				out.close();
 			} else {
-				System.out.println("INFO - " +  "successfully sent events to Split");
-				//EventCounter.splitEventSent += batch.length();
-				//System.out.println("INFO - " +  "Current Event Get from Mixpanel = " + EventCounter.mixpanelEventQuery);
-				//LOGGER.log(Level.FINE, "Current Event Sent to Split = " + EventCounter.splitEventSent);
+				System.out.println("INFO - " +  "successfully sent " + batch.length() + " events to Split");
 			}
 			
 			// Courtesy to minimize pressure on API

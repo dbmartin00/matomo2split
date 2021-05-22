@@ -18,6 +18,7 @@ public class Configuration {
 	public String userIdField;
 	public String valueField;
 	public String eventTypePrefix;
+	public String debugDirectory;
 
 	public static Configuration fromFile(String configFilePath) throws IOException {
 		String configContents = Files.readString(Paths.get(configFilePath));

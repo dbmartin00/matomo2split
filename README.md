@@ -23,9 +23,6 @@ Sample configuration file.
   "siteId" : "1",
   "batchSize" : 1000,
   "retries" : 5,
-  "userIdField" : "userId", // unused
-  "valueField" : "", // unused
-  "eventTypePrefix" : "mo", // unused
   "debugDirectory" : "/tmp/split"
 }
 ```
